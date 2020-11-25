@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 print(tf.__version__)
 
 ## Import載入 the Fashion MNIST dataset
+##載入資料
 
 fashion_mnist = tf.keras.datasets.fashion_mnist
 
@@ -19,7 +20,7 @@ fashion_mnist = tf.keras.datasets.fashion_mnist
 
 ##Loading the dataset returns four NumPy arrays:
 
-###載入資料資料設定參數
+###設定資料參數
 
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
@@ -64,7 +65,9 @@ train_images = train_images / 255.0
 test_images = test_images / 255.0
 
 ## To verify that the data is in the correct format 
-###重新繪畫正規畫的圖形
+###顯示正規化後的圖表 
+
+####設定顯示大小與各項參數
 
 plt.figure(figsize=(10,10))
 for i in range(25):
