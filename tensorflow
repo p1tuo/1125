@@ -1,0 +1,85 @@
+
+# TensorFlow and tf.keras
+##載入 tensorflow 裡面的套件 tf.keras
+
+import tensorflow as tf
+
+# Helper libraries
+import numpy as np
+import matplotlib.pyplot as plt
+
+##顯示tf的版本
+print(tf.__version__)
+
+## Import載入 the Fashion MNIST dataset
+
+fashion_mnist = tf.keras.datasets.fashion_mnist
+
+(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+
+##Loading the dataset returns four NumPy arrays:
+
+###載入資料資料設定參數
+
+class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+
+## Explore the data
+
+###檢測函數值
+
+train_images.shape
+
+len(train_labels)
+
+train_labels
+
+test_images.shape
+
+len(test_labels)
+
+## Preprocess the data
+
+#建構一個二維的圖表
+plt.figure()
+
+#顯示圖像
+plt.imshow(train_images[0])
+
+#顯示色彩變色條
+plt.colorbar()
+
+#設定網格是否可以看的到
+plt.grid(False)
+
+#顯示我們所繪畫的圖表
+
+plt.show()
+
+## Scale these values to a range of 0 to 1 before feeding them to the neural network model. 
+###將train_images 做正規化處理
+
+train_images = train_images / 255.0
+
+test_images = test_images / 255.0
+
+## To verify that the data is in the correct format 
+###重新繪畫正規畫的圖形
+
+plt.figure(figsize=(10,10))
+for i in range(25):
+    plt.subplot(5,5,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_images[i], cmap=plt.cm.binary)
+    plt.xlabel(class_names[train_labels[i]])
+plt.show()
+
+## Build the model
+## KERAS開發模式: 1.Sequential(堆積木)  2.FUCTIONAL api   3.SUBCLASS(物件導向  子類別)   
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dense(10)
